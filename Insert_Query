@@ -1,0 +1,13 @@
+<?php
+$con = mysqli_connect("localhost","root","","first");
+if (!$con)
+{
+   echo -1;
+}
+mysqli_query($con,"set names 'utf8'");
+
+$sql = "INSERT INTO `user` (`name`, `sex`, `birthday`, `age`) VALUES ('wangyue', 'man', '1998.11.05', '111')";
+mysqli_query($con,$sql);
+$query = mysqli_query($con,"SELECT * FROM user");
+var_dump($query);
+echo mysqli_errno($con) ."<br />";          //2017/1/15
