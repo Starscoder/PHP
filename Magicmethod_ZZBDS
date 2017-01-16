@@ -1,0 +1,39 @@
+<?php
+$con = mysqli_connect("localhost","root","","first");
+if (mysqli_connect_errno()){
+    echo 'Error:Could not connect to database. Please try again';
+    exit;
+}
+
+
+$Pname = $_POST['name']=1;
+$Ppassword = $_POST['password']=1;
+$Page = $_POST['age']=1;
+$Psex = $_POST['sex']=1;
+$Prepassword = $_POST['repassword']=1;
+$Pnumber = $_POST['number']=1;
+$Pemail = $_POST['email']=1;
+if (!preg_match('^[A-Za-z0-9]+$^',$Pname)){
+    echo "<p>That is not a valid name.</p>";
+    exit;
+}
+if (!preg_match('^[a-zA-Z0-9_\-\\.]+@[a-zA-Z0-9\-]+[a-zA-Z0-9\-\.]+$^',$Pemail)){
+    echo "<p>That is not a valid email address.</p>";
+        exit;
+}
+if (!preg_match('d{3}-d{8}|d{4}-d{7} ',$Pnumber)){
+    echo "<p>That is not a valid phone number.</p>";
+    exit;
+}
+if($Ppassword!=$Prepassword){
+    echo "Please check your password!";
+    exit;
+}
+
+else{
+    $sql = "INSERT INTO `user` (`name`, `sex`, `birthday`, `age`) VALUES ($Pname, $Psex, $Pnumber, $Page)";
+    mysqli_query($con,$sql);
+    $query = mysqli_query($con,"SELECT * FROM user WHERE NAME = 'wangyue'");
+    var_dump($query);
+
+}       //2017/1/6
