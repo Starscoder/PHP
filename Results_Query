@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册结果查询</title>
+</head>
+<body>
+<h1>请输入您的信息</h1>
+<form action="search1.php">
+    注册用户名：<input type="text" name="Searchname" >
+    <input type="submit" value="查询" name="submit" >
+
+</form>
+<table style='text-align:left;' border='1'>
+    <tr><th>名字</th><th>年龄</th><th>性别</th></tr>
+
+</table>
+
+</body>
+</html>
+----------------------------------------------------------------------------
+<?php
+
+
+
+$con = mysqli_connect("localhost","root","wy1983","first");
+$sql = mysqli_query( $con,"select * from user");
+$datarow = mysql_num_rows($sql); //长度
+$Sname = $_POST['Searchname']=1;
+if ($Sname)
+{
+    echo "Login successfully!";
+    for($i=0;$i<$datarow;$i++){
+    $sql_arr = mysqli_fetch_assoc($sql);
+
+    $name = $sql_arr['name'];
+    $age = $sql_arr['age'];
+    $sex = $sql_arr['sex'];
+    echo "<tr><td>$name</td><td>$age</td><td>$sex</td></tr>";
+}
+else{
+    echo "Login failed!";
+    exit;
+}
+
+}
