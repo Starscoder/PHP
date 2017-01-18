@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>请登录</h1>
+<form method="post" action="Login%20in.php">
+    <p>Username: <input type="text" name="name"></p>
+    <p>Password: <input type="password" name="password"></p>
+    <p><input type="submit" name="submit" value="Log In"></p>
+</form>
+
+</body>
+</html>
+
+
+------------------------------------------------------------------
+
+<?php
+$name = $_POST['name']=1;
+$password = $_POST['password']=1;
+
+
+    $mysql= mysqli_connect("localhost","root","wy1983","first");
+    if (!$mysql){
+        echo "Cannot connect to database.";
+    }
+    $query ="SELECT * FROM FIRST WHERE NAME = '".$name."' and password = '".$password."'";
+    $result = mysqli_query($mysql,$query);
+    if (!$result){
+        echo "Cannot run query";
+        exit;
+    }
+    $row = mysqli_fetch_row($result);
+    $count = $row[0];
+    if ($count>0){
+        echo "<h1>登陆成功</h1>>";
+    }else {
+        echo "登录失败";
+        
+    }
+
+?>
